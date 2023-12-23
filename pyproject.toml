@@ -1,0 +1,36 @@
+[project]
+name = "Habito"
+version = "2024.1.1"
+description = "A simple portal to track your habits and todos."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE.txt" }
+keywords = ["tracker", "tasks", "todos", "habits"]
+authors = [{ name = "Ratan Kulshreshtha", email = "ratan.shreshtha@gmail.com" }]
+maintainers = [{ name = "Ratan Kulshreshtha", email = "ratan.shreshtha@gmail.com" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+]
+
+dependencies = [
+    "fastapi",
+    "httpx",
+    "pydantic",
+    "uvicorn",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+format = ["black", "isort"]
+
+[project.urls]
+homepage = "https://habito.app"
+repository = "https://github.com/RatanShreshtha/Habito"
+
+[tool.black]
+line-length = 120
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
