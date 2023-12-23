@@ -1,8 +1,9 @@
-from typing import Union
-
 from fastapi import FastAPI
 
-app = FastAPI()
+from src.core.config import settings
+
+app_settings = settings.app_settings.model_dump()
+app = FastAPI(**app_settings)
 
 
 @app.get("/")
