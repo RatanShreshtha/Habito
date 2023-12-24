@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 from typing import Optional
 
@@ -20,7 +21,11 @@ class Settings(BaseSettings):
     app_settings: AppSettings = AppSettings()
 
     debug: Optional[bool] = False
-    log_level: Optional[str] = "debug"
+
+    log_level: int = logging.INFO
+    log_file: Path | None = "app.log"
+    log_format: str = "%(asctime)s | %(message)s"
+    log_date_format: str | None = "%d %b %Y | %H:%M:%S"
 
     mongo_db: Optional[str] = None
     mongo_dsn: MongoDsn = Field("mongodb://127.0.0.1:27017")
