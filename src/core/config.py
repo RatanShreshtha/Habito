@@ -1,9 +1,11 @@
 import logging
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
-from pydantic import BaseModel, Field, MongoDsn, RedisDsn
+from pydantic import BaseModel, Field, RedisDsn, UrlConstraints
+from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from typing_extensions import Annotated
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
@@ -28,7 +30,10 @@ class Settings(BaseSettings):
     log_date_format: str | None = "%d %b %Y | %H:%M:%S"
 
     mongo_db: Optional[str] = None
-    mongo_dsn: MongoDsn = Field("mongodb://127.0.0.1:27017")
+    mongo_dsn: Union[
+        Annotated[MultiHostUrl, UrlConstraints(allowed_schemes=["mongodb"], default_port=27017)],
+        Annotated[MultiHostUrl, UrlConstraints(allowed_schemes=["mongodb+srv"])],
+    ] = Field("mongodb://127.0.0.1:27017")
 
     redis_dsn: RedisDsn = Field("redis://localhost:6379")
 
