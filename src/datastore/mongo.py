@@ -18,7 +18,8 @@ class MongoDBConnector:
 
         try:
             await init_beanie(database=client[settings.mongo_db], document_models=models)
-            print(f"Connected to {settings.mongo_db}")
+            print(f"Connected to mongo")
+            return client
         except Exception:
             raise ConnectionError
 

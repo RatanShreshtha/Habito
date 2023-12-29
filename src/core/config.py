@@ -36,6 +36,7 @@ class Settings(BaseSettings):
     ] = Field("mongodb://127.0.0.1:27017")
 
     redis_dsn: RedisDsn = Field("redis://localhost:6379")
+    redis_socket_timeout: float = Field(2)
 
     model_config = SettingsConfigDict(env_file=PROJECT_ROOT / ".env")
 

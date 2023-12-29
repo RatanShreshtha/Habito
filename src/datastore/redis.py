@@ -10,9 +10,10 @@ class RedisConnector:
         """start redis client with Beanie and load models"""
 
         redis_dsn = settings.redis_dsn.unicode_string()
+        redis_socket_timeout = settings.redis_socket_timeout
 
         try:
-            client = redis.Redis.from_url(redis_dsn, decode_responses=True)
+            client = redis.Redis.from_url(redis_dsn, decode_responses=True, socket_timeout=redis_socket_timeout)
             print(f"Connected to redis")
             return client
         except Exception:
