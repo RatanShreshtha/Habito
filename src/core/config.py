@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field, RedisDsn, UrlConstraints
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing_extensions import Annotated
+from datetime import timedelta
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
@@ -37,6 +38,12 @@ class Settings(BaseSettings):
 
     redis_dsn: RedisDsn = Field("redis://localhost:6379")
     redis_socket_timeout: float = Field(2)
+
+    salt: bytes = b"a pinch od salt"
+    secret_key: str = "Some very very secret key"
+    access_token_expiry: timedelta = Field(timedelta(minutes=45))
+    refresh_token_expiry: timedelta = Field(timedelta(days=7))
+
 
     model_config = SettingsConfigDict(env_file=PROJECT_ROOT / ".env")
 
