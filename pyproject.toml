@@ -15,8 +15,11 @@ dependencies = [
     "fastapi",
     "httpx",
     "rich",
+    "passlib[bcrypt]",
     "pydantic",
     "pydantic-settings",
+    "python-jose[cryptography]",
+    "python-multipart",
     "uvicorn",
 ]
 
