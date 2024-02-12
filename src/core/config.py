@@ -42,10 +42,30 @@ class Settings(BaseSettings):
     algorithm: str = "HS256"
     access_token_secret_key: str = "A very very secret string"
     refresh_token_secret_key: str = "Another very very secret string"
-    access_token_expiry: int = 30
-    refresh_token_expiry: int = 7 * 24 * 60
+    access_token_expiry: timedelta = timedelta(minutes=30)
+    refresh_token_expiry: timedelta = timedelta(minutes=7 * 24 * 60)
 
     model_config = SettingsConfigDict(env_file=PROJECT_ROOT / ".env")
+
+    @validator("access_token_expiry", pre=True, check_fields=False)
+    def access_token_expiry_is_valid(cls, v):
+        if isinstance(v, timedelta):
+            return v
+
+        try:
+            return timedelta(minutes=int(v))
+        except Exception:
+            raise AttributeError(v)
+
+    @validator("refresh_token_expiry", pre=True, check_fields=False)
+    def refresh_token_expiry_is_valid(cls, v):
+        if isinstance(v, timedelta):
+            return v
+
+        try:
+            return timedelta(minutes=int(v))
+        except Exception:
+            raise AttributeError(v)
 
 
 settings = Settings()

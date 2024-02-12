@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from src.core.config import settings
 from src.datastore.mongo import db
 from src.datastore.redis import cache
+from src.routes.auth import auth_router
 from src.routes.health import health_router
 from src.routes.task import task_router
 
@@ -25,6 +26,7 @@ def get_app() -> FastAPI:
     app = FastAPI(**app_settings, lifespan=lifespan)
 
     app.include_router(health_router, tags=["Root"])
+    app.include_router(auth_router, prefix="/auth", tags=["Auth"])
     app.include_router(task_router, prefix="/tasks", tags=["Task"])
 
     return app

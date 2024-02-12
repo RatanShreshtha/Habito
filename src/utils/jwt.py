@@ -1,22 +1,34 @@
-from datetime import datetime, timedelta
-from typing import Annotated, Any, Union
+"""FastAPI JWT configuration."""
 
-from jose import JWTError, jwt
+from datetime import timedelta
+
+from fastapi_jwt import JwtAccessBearer, JwtAuthorizationCredentials, JwtRefreshBearer
 
 from src.core.config import settings
+from src.models.user import User
+
+ACCESS_EXPIRES = settings.access_token_expiry
+REFRESH_EXPIRES = settings.refresh_token_expiry
+
+access_security = JwtAccessBearer(
+    settings.access_token_secret_key,
+    access_expires_delta=ACCESS_EXPIRES,
+    refresh_expires_delta=REFRESH_EXPIRES,
+)
+
+refresh_security = JwtRefreshBearer(
+    settings.refresh_token_secret_key,
+    access_expires_delta=ACCESS_EXPIRES,
+    refresh_expires_delta=REFRESH_EXPIRES,
+)
 
 
-def create_access_token(subject: Union[str, Any]) -> str:
-    expires_delta = datetime.utcnow() + timedelta(minutes=settings.access_token_expiry)
-
-    to_encode = {"exp": expires_delta, "sub": str(subject)}
-    encoded_jwt = jwt.encode(to_encode, settings.access_token_secret_key, settings.algorithm)
-    return encoded_jwt
+async def user_from_credentials(auth: JwtAuthorizationCredentials) -> User | None:
+    """Return the user associated with auth credentials."""
+    return await User.by_email(auth.subject["username"])
 
 
-def create_refresh_token(subject: Union[str, Any]) -> str:
-    expires_delta = datetime.utcnow() + timedelta(minutes=settings.refresh_token_expiry)
-
-    to_encode = {"exp": expires_delta, "sub": str(subject)}
-    encoded_jwt = jwt.encode(to_encode, settings.refresh_token_secret_key, settings.algorithm)
-    return encoded_jwt
+async def user_from_token(token: str) -> User | None:
+    """Return the user associated with a token value."""
+    payload = access_security._decode(token)
+    return await User.by_email(payload["subject"]["username"])

@@ -3,6 +3,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from src.core.config import settings
 from src.models.task import Task
+from src.models.user import User
 
 
 class MongoDBConnector:
@@ -14,7 +15,7 @@ class MongoDBConnector:
         mongo_dsn = settings.mongo_dsn.unicode_string()
 
         client = AsyncIOMotorClient(mongo_dsn)
-        models = [Task]
+        models = [Task, User]
 
         try:
             await init_beanie(database=client[settings.mongo_db], document_models=models)

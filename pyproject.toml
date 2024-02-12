@@ -13,6 +13,7 @@ classifiers = [
 
 dependencies = [
     "fastapi",
+    "fastapi-jwt",
     "httpx",
     "rich",
     "passlib[bcrypt]",
