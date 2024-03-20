@@ -12,7 +12,7 @@
     "@fortawesome/fontawesome-free": "^6.4.2",
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
-    "daisyui": "^3.6.3",
+    "daisyui": "^4.7.3",
     "nuxt": "^3.7.0"
   }
 }
