@@ -8,8 +8,8 @@
           <i class="fa-solid fa-bars"></i>
         </label>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-          <li><a>Homepage</a></li>
-          <li><a>Portfolio</a></li>
+          <li><a>Profile</a></li>
+          <li><a>Statistics</a></li>
           <li><a>About</a></li>
         </ul>
       </div>
@@ -18,15 +18,15 @@
       <a class="btn btn-ghost normal-case text-xl">Habito</a>
     </div>
     <div class="navbar-end">
-      <button class="btn btn-ghost btn-circle">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-      <button class="btn btn-ghost btn-circle">
-        <div class="indicator">
-          <i class="fa-regular fa-bell"></i>
-          <span class="badge badge-xs badge-primary indicator-item"></span>
-        </div>
-      </button>
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-ghost btn-circle">
+          <i class="fa-solid fa-user"></i>
+        </label>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Sign In</a></li>
+          <li><a>Sign Out</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 </template>
