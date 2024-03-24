@@ -10,17 +10,11 @@
 
         <div class="flex justify-center">
             <div class="max-w-lg">
-                <button class="btn btn-block font-bold my-2" @click="login('facebook')">
-                    <img src="~/assets/logos/facebook.svg" class="size-4" /> Facebook
-                </button>
                 <button class="btn btn-block font-bold my-2" @click="login('github')">
                     <img src="~/assets/logos/github.svg" class="size-4" /> Github
                 </button>
                 <button class="btn btn-block font-bold my-2" @click="login('google')">
                     <img src="~/assets/logos/google.svg" class="size-4" /> Google
-                </button>
-                <button class="btn btn-block font-bold my-2" @click="login('linkedin')">
-                    <img src="~/assets/logos/linkedin.svg" class="size-4" /> LinkedIn
                 </button>
                 <button class="btn btn-block font-bold my-2" @click="login('twitter')">
                     <img src="~/assets/logos/twitter.svg" class="size-4" /> Twitter
