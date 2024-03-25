@@ -42,7 +42,8 @@ const login = async (provider: any) => {
         query.redirectTo !== undefined
             ? `?redirectTo=${query.redirectTo}`
             : '';
-    const redirectTo = `${useRuntimeConfig().public.baseUrl}/confirm${queryParams}`
+    const redirectTo = `${window.location.origin}/confirm${queryParams}`;
+
     const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: { redirectTo },

@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  quiet: false,
   app: {
     head: {
       title: 'Habito',
@@ -15,11 +16,6 @@ export default defineNuxtConfig({
   css: ['@fortawesome/fontawesome-free/css/all.css'],
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/supabase'],
-  runtimeConfig: {
-    public: {
-      baseUrl: process.env.BASE_URL || 'http://localhost:3000'
-    }
-  },
   supabase: {
     redirectOptions: {
       login: '/login',
